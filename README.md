@@ -2,7 +2,8 @@
 Adds [styl](https://github.com/visionmedia/styl) CSS preprocessor support to
 [brunch](http://brunch.io).
 
-Styl is a successor of Stylus with less complexity.
+Styl is a successor of [Stylus](http://learnboost.github.io/stylus/)
+with less complexity (and features).
 
 ## Usage
 Install the plugin via npm with `npm install --save styl-brunch`.

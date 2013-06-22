@@ -1,6 +1,6 @@
 {
   "name": "styl-brunch",
-  "version": "1.7.0",
+  "version": "1.6.0",
   "description": "Adds styl CSS preprocessor support to brunch.",
   "author": "Paul Miller (http://paulmillr.com/)",
   "homepage": "https://github.com/brunch/styl-brunch",
