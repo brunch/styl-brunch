@@ -1,0 +1,23 @@
+{
+  "name": "styl-brunch",
+  "version": "1.7.0",
+  "description": "Adds styl CSS preprocessor support to brunch.",
+  "author": "Paul Miller (http://paulmillr.com/)",
+  "homepage": "https://github.com/brunch/styl-brunch",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:brunch/styl-brunch.git"
+  },
+  "main": "./lib/index",
+  "scripts": {
+    "prepublish": "rm -rf lib && coffee --bare --output lib/ src/",
+    "test": "node_modules/.bin/mocha --require test/common.js"
+  },
+  "dependencies": {
+    "styl": "~0.2.2"
+  },
+  "devDependencies": {
+    "mocha": "1.10.0",
+    "chai": "1.7.0"
+  }
+}
