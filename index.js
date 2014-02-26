@@ -1,8 +1,6 @@
 var styl = require('styl');
 
-function StylPlugin(config) {
-  this.config = config;
-}
+function StylPlugin(config) {}
 
 StylPlugin.prototype.brunchPlugin = true;
 

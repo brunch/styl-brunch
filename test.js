@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Plugin = require('../lib');
+var Plugin = require('./');
 
 describe('Plugin', function() {
   var plugin;
@@ -23,7 +23,7 @@ describe('Plugin', function() {
       var expected = 'body {\n  -ms-transition: height;\n  -moz-transition: height;\n  -webkit-transition: height;\n  transition: height;\n}';
 
       plugin.compile(content, 'a.styl', function(error, data) {
-        expect(error).to.equal(null);
+        expect(error).to.equal();
         expect(data).to.equal(expected)
         done();
       });
