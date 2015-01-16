@@ -23,6 +23,7 @@
     "rework-plugin-ease": "^1.0.1",
     "rework-plugin-mixin": "^1.0.0",
     "rework-plugin-references": "^1.0.1",
+    "rework-shade": "^1.4.3",
     "rework-variant": "^0.2.2"
   },
   "devDependencies": {

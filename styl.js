@@ -15,7 +15,8 @@ var plugins = [
   'rework-plugin-colors',
   'rework-plugin-references',
   'rework-plugin-at2x',
-  'rework-inherit'
+  'rework-inherit',
+  'rework-shade'
 ].map(require);
 
 function call(plugin) {
