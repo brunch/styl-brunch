@@ -20,7 +20,7 @@ describe('Plugin', function() {
 
     it('should compile and produce valid result', function(done) {
       var content = 'body\n  transition: height';
-      var expected = 'body {\n  -ms-transition: height;\n  -moz-transition: height;\n  -webkit-transition: height;\n  transition: height;\n}';
+      var expected = 'body {\n  transition: height;\n}';
 
       plugin.compile(content, 'a.styl', function(error, data) {
         expect(error).to.equal();
