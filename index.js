@@ -1,8 +1,14 @@
 var styl = require('./styl');
 var sysPath = require('path');
+var progeny = require('progeny');
 
 function StylPlugin(config) {
+  if (config == null) config = {};
   this.rootPath = config.paths.root;
+
+  this.getDependencies = progeny({
+    rootPath: this.rootPath
+  });
 }
 
 StylPlugin.prototype.brunchPlugin = true;
