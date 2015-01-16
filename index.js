@@ -6,7 +6,7 @@ function StylPlugin(config) {
 }
 
 StylPlugin.prototype.brunchPlugin = true;
-StylPlugin.prototype.type = true;
+StylPlugin.prototype.type = 'stylesheet';
 StylPlugin.prototype.extension = 'styl';
 
 StylPlugin.prototype.compile = function(data, path, callback) {
