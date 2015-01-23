@@ -50,7 +50,6 @@ function Style(str, options) {
   this.str = str;
   this.compress = options.compress;
   this.rework = rework(str);
-  this.use = this.rework.use.bind(this.rework);
 }
 
 /**
@@ -60,10 +59,16 @@ function Style(str, options) {
  * @api public
  */
 
-Style.prototype.toString = function(){
-  this.use(imprt({path: this.path}));
-  this.use(variant());
-  this.use(mixins);
-  plugins.map(call).forEach(this.use)
-  return this.rework.toString({ compress: this.compress });
+Style.prototype.toPromise = function(fn, err){
+  var self = this;
+  var rew = self.rework;
+  return rew
+    .then(imprt({path: self.path}))
+    .then(function() {
+      rew.use(variant());
+      rew.use(mixins);
+      // plugins.map(call).forEach(rew.use);
+      return rew.toString({ compress: self.compress });
+    })
+    .then(fn, err);
 };

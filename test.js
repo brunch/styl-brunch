@@ -24,7 +24,7 @@ describe('Plugin', function() {
 
       plugin.compile(content, 'a.styl', function(error, data) {
         expect(error).to.equal();
-        expect(data).to.equal(expected)
+        expect(data).to.equal(expected);
         done();
       });
     });

@@ -4,7 +4,7 @@ var progeny = require('progeny');
 
 function StylPlugin(config) {
   if (config == null) config = {};
-  this.rootPath = config.paths.root;
+  this.rootPath = (config && config.paths || {}).root || '.';
 
   this.getDependencies = progeny({
     rootPath: this.rootPath
@@ -18,14 +18,11 @@ StylPlugin.prototype.extension = 'styl';
 StylPlugin.prototype.compile = function(data, path, callback) {
   var dir = sysPath.dirname(path);
   var options = {whitespace: true, path: [dir, this.rootPath]};
-  var result, error;
-  try {
-    result = styl(data, options).toString();
-  } catch (_error) {
-    error = _error;
-  } finally {
-    callback(error, result);
-  }
+
+  styl(data, options)
+    .toPromise(function(res) {
+      callback(undefined, res);
+    }, callback);
 };
 
 module.exports = StylPlugin;
