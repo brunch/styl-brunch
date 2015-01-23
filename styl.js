@@ -63,7 +63,7 @@ Style.prototype.toPromise = function(fn, err){
   var self = this;
   var rew = self.rework;
   return rew
-    .then(imprt({path: self.path}))
+    .then(imprt({path: self.path, transform: whitespace}))
     .then(function() {
       rew.use(variant());
       rew.use(mixins);
