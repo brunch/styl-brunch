@@ -5,10 +5,6 @@ var progeny = require('progeny');
 function StylPlugin(config) {
   if (config == null) config = {};
   this.rootPath = (config && config.paths || {}).root || '.';
-
-  this.getDependencies = progeny({
-    rootPath: this.rootPath
-  });
 }
 
 StylPlugin.prototype.brunchPlugin = true;
@@ -19,10 +15,12 @@ StylPlugin.prototype.compile = function(data, path, callback) {
   var dir = sysPath.dirname(path);
   var options = {whitespace: true, path: [dir, this.rootPath]};
 
-  styl(data, options)
-    .toPromise(function(res) {
-      callback(undefined, res);
-    }, callback);
+  styl(data, options).compile(function(res) {
+    callback(undefined, res);
+  }, function(err) {
+    console.log('error');
+    callback(err);
+  });
 };
 
 module.exports = StylPlugin;

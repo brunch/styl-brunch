@@ -59,16 +59,17 @@ function Style(str, options) {
  * @api public
  */
 
-Style.prototype.toPromise = function(fn, err){
+Style.prototype.compile = function(fn, onErr){
   var self = this;
   var rew = self.rework;
   return rew
-    .then(imprt({path: self.path, transform: whitespace}))
-    .then(function() {
+    .consume(imprt({path: self.path, transform: whitespace}))
+    .consume(function() {
       rew.use(variant());
       rew.use(mixins);
+      var data = rew.toString({ compress: self.compress });
       // plugins.map(call).forEach(rew.use);
-      return rew.toString({ compress: self.compress });
-    })
-    .then(fn, err);
+      // console.log(Object.keys(data));
+      fn(data);
+    }, onErr);
 };
