@@ -59,7 +59,7 @@ function Style(str, options) {
  * @api public
  */
 
-Style.prototype.compile = function(fn, onErr){
+Style.prototype.compile = function(fn){
   var self = this;
   var rew = self.rework;
   return rew
@@ -68,8 +68,10 @@ Style.prototype.compile = function(fn, onErr){
       rew.use(variant());
       rew.use(mixins);
       var data = rew.toString({ compress: self.compress });
-      // plugins.map(call).forEach(rew.use);
+      // plugins.map(call).forEach  (rew.use);
       // console.log(Object.keys(data));
-      fn(data);
-    }, onErr);
+      fn(null, {data: data, dependencies: rew.dependencies});
+    }, function(error) {
+      fn(error);
+    });
 };

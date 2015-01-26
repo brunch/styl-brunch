@@ -14,13 +14,7 @@ StylPlugin.prototype.extension = 'styl';
 StylPlugin.prototype.compile = function(data, path, callback) {
   var dir = sysPath.dirname(path);
   var options = {whitespace: true, path: [dir, this.rootPath]};
-
-  styl(data, options).compile(function(res) {
-    callback(undefined, res);
-  }, function(err) {
-    console.log('error');
-    callback(err);
-  });
+  styl(data, options).compile(callback);
 };
 
 module.exports = StylPlugin;
