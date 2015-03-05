@@ -65,11 +65,14 @@ Style.prototype.compile = function(fn){
   return rew
     .consume(imprt({path: self.path, transform: whitespace}))
     .consume(function() {
-      rew.use(variant());
-      rew.use(mixins);
-      var data = rew.toString({ compress: self.compress });
-      // plugins.map(call).forEach  (rew.use);
-      // console.log(Object.keys(data));
+      var data;
+      try {
+        rew.use(variant());
+        rew.use(mixins);
+        data = rew.toString({ compress: self.compress });
+      } catch(e) {
+        return fn(e)
+      }
       fn(null, {data: data, dependencies: rew.dependencies});
     }, function(error) {
       fn(error);
