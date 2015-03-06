@@ -21,6 +21,7 @@
     "rework-plugin-at2x": "^1.0.2",
     "rework-plugin-colors": "^1.0.3",
     "rework-plugin-ease": "^1.0.1",
+    "rework-plugin-function": "^1.0.2",
     "rework-plugin-mixin": "^1.0.0",
     "rework-plugin-references": "^1.0.1",
     "rework-shade": "^1.4.3",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "mocha": "1.10.0",
-    "chai": "1.7.0"
+    "chai": "1.7.0",
+    "color-parser": "0.1.0"
   }
 }

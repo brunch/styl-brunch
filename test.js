@@ -1,11 +1,31 @@
 var expect = require('chai').expect;
+var parse = require('color-parser');
 var Plugin = require('./');
 
 describe('Plugin', function() {
   var plugin;
+  var config = {
+    plugins: {
+      styl: {
+        functions: {
+          rgba: function(color, alpha){
+            var args;
+            if (2 == arguments.length) {
+              var c = parse(color.trim());
+              args = [c.r, c.g, c.b, alpha];
+            } else {
+              args = [].slice.call(arguments);
+            }
+
+            return 'rgba(' + args.join(', ') + ')';
+          },
+        }
+      }
+    }
+  }
 
   beforeEach(function() {
-    plugin = new Plugin({});
+    plugin = new Plugin(config);
   });
 
   it('should be an object', function() {
@@ -24,7 +44,18 @@ describe('Plugin', function() {
 
       plugin.compile(content, 'a.styl', function(error, data) {
         expect(error).to.equal();
-        expect(data).to.equal(expected);
+        expect(data.data).to.equal(expected);
+        done();
+      });
+    });
+
+    it('should support extensions', function(done) {
+      var content = 'body\n  color: rgba(#ccc, .5)';
+      var expected = 'body {\n  color: rgba(204, 204, 204, .5);\n}';
+
+      plugin.compile(content, 'a.styl', function(error, data) {
+        expect(error).to.equal();
+        expect(data.data).to.equal(expected);
         done();
       });
     });

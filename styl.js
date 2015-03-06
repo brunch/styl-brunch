@@ -49,6 +49,7 @@ function Style(str, options) {
   this.path = options.path || '.';
   this.str = str;
   this.compress = options.compress;
+  this.functions = options.functions;
   this.rework = rework(str);
 }
 
@@ -69,11 +70,12 @@ Style.prototype.compile = function(fn){
       try {
         rew.use(variant());
         rew.use(mixins);
+        if (self.functions) rew.use(self.functions);
         data = rew.toString({ compress: self.compress });
       } catch(e) {
         return fn(e)
       }
-      fn(null, {data: data, dependencies: rew.dependencies});
+      fn(undefined, {data: data, dependencies: rew.dependencies});
     }, function(error) {
       fn(error);
     });
