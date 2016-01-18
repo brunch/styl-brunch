@@ -42,22 +42,20 @@ describe('Plugin', function() {
       var content = 'body\n  transition: height';
       var expected = 'body {\n  transition: height;\n}';
 
-      plugin.compile(content, 'a.styl', function(error, data) {
-        expect(error).to.equal();
+      plugin.compile({data: content, path: 'a.styl'}).then(data => {
         expect(data.data).to.equal(expected);
         done();
-      });
+      }, error => expect(error).to.equal());
     });
 
     it('should support extensions', function(done) {
       var content = 'body\n  color: rgba(#ccc, .5)';
       var expected = 'body {\n  color: rgba(204, 204, 204, .5);\n}';
 
-      plugin.compile(content, 'a.styl', function(error, data) {
-        expect(error).to.equal();
+      plugin.compile({data: content, path: 'a.styl'}).then(data => {
         expect(data.data).to.equal(expected);
         done();
-      });
+      }, error => expect(error).to.equal());
     });
   });
 });

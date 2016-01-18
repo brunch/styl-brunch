@@ -9,7 +9,7 @@
     "url": "git@github.com:brunch/styl-brunch.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/eslint index.js styl.js && node_modules/.bin/mocha"
   },
   "dependencies": {
     "css-whitespace": "^1.1.0",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "mocha": "1.10.0",
     "chai": "1.7.0",
-    "color-parser": "0.1.0"
+    "color-parser": "0.1.0",
+    "eslint": "^1.10.3"
   }
 }
