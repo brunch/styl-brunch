@@ -1,35 +1,45 @@
-var styl = require('./styl');
-var functions = require('rework-plugin-function');
-var sysPath = require('path');
-var progeny = require('progeny');
+'use strict';
 
-function StylPlugin(config) {
-  if (!config) config = {};
-  this.rootPath = (config.paths || {}).root || '.';
-  var plg = config.plugins || {};
-  var styl = plg.styl || {};
-  this.config = styl;
-  if (styl.functions) {
-    this.functions = functions(styl.functions);
+const styl = require('./styl');
+const functions = require('rework-plugin-function');
+const sysPath = require('path');
+
+class StylPlugin {
+  constructor(config) {
+    if (!config) config = {};
+    this.rootPath = (config.paths || {}).root || '.';
+    const styl = this.config = config.plugins && config.plugins.styl || {};
+    if (styl.functions) {
+      this.functions = functions(styl.functions);
+    }
+  }
+
+  compile(params) {
+    const data = params.data;
+    const path = params.path;
+
+    const dir = sysPath.dirname(path);
+    const options = {
+      whitespace: true,
+      path: [dir, this.rootPath],
+      functions: this.functions
+    };
+
+    return new Promise((resolve, reject) => {
+      try {
+        new styl(data, options).compile((err, res) => {
+          if (err) return reject(err);
+          resolve(res);
+        });
+      } catch (_error) {
+        reject(_error);
+      }
+    });
   }
 }
 
 StylPlugin.prototype.brunchPlugin = true;
 StylPlugin.prototype.type = 'stylesheet';
 StylPlugin.prototype.extension = 'styl';
-
-StylPlugin.prototype.compile = function(data, path, callback) {
-  var dir = sysPath.dirname(path);
-  var options = {
-    whitespace: true,
-    path: [dir, this.rootPath],
-    functions: this.functions
-  };
-  try {
-    styl(data, options).compile(callback);
-  } catch (_error) {
-    callback(_error);
-  }
-};
 
 module.exports = StylPlugin;
