@@ -6,7 +6,7 @@ Styl is a successor of [Stylus](http://learnboost.github.io/stylus/)
 with less complexity (and features).
 
 ## Usage
-Install the plugin via npm with `npm install --save styl-brunch`.
+Install the plugin via npm with `npm install --save-dev styl-brunch`.
 
 Or, do manual install:
 
